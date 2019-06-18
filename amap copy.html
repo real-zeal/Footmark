@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <style>
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+            margin: 3px;
+        }
+    </style>
+    <title>弧线的绘制和编辑</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=320f6fdbf528ac0ccd282b666c3cc7fb&plugin=AMap.BezierCurveEditor"></script>
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+</head>
+
+<body>
+    <div id="container" tabindex="0"></div>
+
+    <!-- <iframe width='560px' height='440px' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://yuntu.amap.com/share/3uYFZz'></iframe> -->
+
+    <script type="text/javascript">
+        var map = new AMap.Map("container", {
+            center: [111.22533, 32.28522],
+            zoom: 5,
+            viewMode: "2D",
+            pitch: 30
+        });
+
+        //贝赛尔曲线经过的起点，途经点，控制点，终点的二维数组
+        var startPoint = [[116.39, 39.9]]; // 起点
+        var viaPoint1 = [[116.39, 39.9], [106.39, 38.9]]; // 控制点，途经点
+        var viaPoint2 = [[116.39, 39.9], [106.39, 38.9], [106.39, 38.9]]; // 控制点，控制点，途经点
+        var endPoint = [[116.39, 39.9], [106.39, 38.9]]; // 控制点，终点
+
+        var path = [
+            startPoint,
+            viaPoint1,
+            viaPoint2,
+            endPoint
+        ];
+
+        var bezierCurve = new AMap.BezierCurve({
+            path: path,
+            strokeWeight: 10, // 线条宽度
+            strokeColor: '#fff', // 线条颜色
+            isOutline: true,	// 是否描边
+            outlineColor: 'red', // 描边颜色
+            borderWeight: 5 // 描边宽度
+        });
+
+        map.add(bezierCurve);
+        map.setMapStyle("amap://styles/whitesmoke");
+        map.plugin(["AMap.ToolBar", "AMap.Scale", "AMap.Geolocation", "AMap.OverView"],
+            function () {
+                map.addControl(new AMap.ToolBar());
+                map.addControl(new AMap.Scale());
+                // map.addControl(new AMap.Geolocation());
+                // map.addControl(new AMap.OverView({ isOpen: true }));
+            });
+    </script>
+</body>
+
+</html>
