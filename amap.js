@@ -1,3 +1,18 @@
+/**
+ * csv文件解析 
+ */
+$(document).ready(function () {
+    var myItems;
+
+    $.getJSON('data/testData.json', function (data) {
+        myItems = data.items;
+        console.log(myItems);
+    });
+});
+
+/**
+ * 可视化
+ */
 var map = new AMap.Map("container", {
     // center: [110.981331, 33.155814],
     zoom: 14,
